@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.openSource.ceshidao.PatientMapper">
+    <resultMap id="BaseResultMap" type="org.openSource.pojo.PatientBean">
+        <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+        <result column="DOCTOR_ID" jdbcType="VARCHAR" property="doctorId" />
+        <result column="PATIENT_NAME" jdbcType="VARCHAR" property="patientName" />
+        <result column="PATIENT_AGE" jdbcType="INTEGER" property="patientAge" />
+        <result column="PATIENT_SEX" jdbcType="VARCHAR" property="patientSex" />
+        <result column="PATIENT_MARITAL" jdbcType="VARCHAR" property="patientMarital" />
+        <result column="PATIENT_TEL" jdbcType="VARCHAR" property="patientTel" />
+        <result column="PATIENT_ADDRESS" jdbcType="VARCHAR" property="patientAddress" />
+        <result column="INPATIENT_BED_ID" jdbcType="VARCHAR" property="patientBedId" />
+        <result column="patient_money" jdbcType="DOUBLE" property="pratientMoney" />
+    </resultMap>
+<!-- patientId doctorId patientName patientAge patientSex patientMarital patientTel patientAddress patientBedId pratientMoney -->
+    <!-- xml中需要注意大于等于号等特殊符号,需要进行转义 -->
+    <select id="getAllPatient" resultMap="BaseResultMap">
+        select PATIENT_ID, DOCTOR_ID, PATIENT_NAME, PATIENT_AGE, PATIENT_SEX, PATIENT_MARITAL, PATIENT_TEL, PATIENT_ADDRESS, INPATIENT_BED_ID, patient_money
+        from patient
+        limit #{start}, #{end}
+    </select>
+    <!--where DOCTOR_ID = #{did}-->
+    <select id="getAllRows" resultType="int">
+        select count(0) from patient
+    </select>
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.openSource.ceshidao.HospitalDepartmentsMapper">
+    <resultMap id="BaseResultMap" type="org.openSource.pojo.HospitalDepartmentsBean">
+        <id column="HOSPITAL_DEPARTMENTS_ID" jdbcType="INTEGER" property="hospitalDepartmentsId"/>
+        <result column="HOSPITAL_DEPARTMENTS_NAME" jdbcType="VARCHAR" property="hospitalDepartmentsName"/>
+        <result column="HOSPITAL_DEPARTMENTS_ADDRESS" jdbcType="VARCHAR" property="hospitalDepartmentsAddress"/>
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="org.openSource.pojo.DoctorBean">
+        <id column="DOCTOR_ID" jdbcType="VARCHAR" property="doctorId"/>
+        <result column="HOSPITAL_DEPARTMENTS_ID" jdbcType="INTEGER" property="hospitalDepartmentsId"/>
+        <result column="DOCTOR_ROLE_ID" jdbcType="INTEGER" property="doctorRoleId"/>
+        <result column="DOCTOR_NAME" jdbcType="VARCHAR" property="doctorName"/>
+        <result column="DOCTOR_SEX" jdbcType="VARCHAR" property="doctorSex"/>
+        <result column="DOCTOR_AGE" jdbcType="INTEGER" property="doctorAge"/>
+        <result column="DOCTOR_TEL" jdbcType="VARCHAR" property="doctorTel"/>
+        <result column="NUM" jdbcType="INTEGER" property="number"/>
+    </resultMap>
+
+    <!-- xml中需要注意大于等于号等特殊符号,需要进行转义 -->
+    <select id="getKeShi" resultMap="BaseResultMap">
+        select HOSPITAL_DEPARTMENTS_ID, HOSPITAL_DEPARTMENTS_NAME, HOSPITAL_DEPARTMENTS_ADDRESS from hospital_departments
+    </select>
+
+    <select id="getDoctor1" resultMap="BaseResultMap2" parameterType="int">
+        select c1.DOCTOR_ID, c1.HOSPITAL_DEPARTMENTS_ID, c1.DOCTOR_ROLE_ID, c1.DOCTOR_NAME, c1.DOCTOR_SEX, c1.DOCTOR_AGE, c1.DOCTOR_TEL, count(0) as NUM from
+			(
+				select DOCTOR.DOCTOR_ID, DOCTOR.HOSPITAL_DEPARTMENTS_ID, DOCTOR.DOCTOR_ROLE_ID, DOCTOR.DOCTOR_NAME, DOCTOR.DOCTOR_SEX, DOCTOR.DOCTOR_AGE, DOCTOR.DOCTOR_TEL
+				from patient left join doctor on patient.DOCTOR_ID = DOCTOR.DOCTOR_ID
+				where PATIENT.DOCTOR_ID != '' and DOCTOR.HOSPITAL_DEPARTMENTS_ID = #{doctorId}
+			) as c1 group by c1.DOCTOR_ID
+    </select>
+
+</mapper>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.openSource.pojo.UserBean;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller(value = "userController")
@@ -28,6 +29,15 @@ public class UserController {
     @RequestMapping(value = "/login")
     public String toLogin() {
         return "login";
+    }
+
+    @RequestMapping(value = "/guahao")
+    public String guaHao(
+            @RequestParam(value = "id", defaultValue = "-1") int id
+    ) {
+
+
+        return "";
     }
 
 }

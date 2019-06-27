@@ -1,0 +1,9 @@
+org\openSource\controller\PublicController.class
+org\openSource\ceshiservice\HospitalDepartmentsServiceImp.class
+org\openSource\ceshidao\HospitalDepartmentsMapper.class
+org\openSource\ceshiservice\UserServiceImp.class
+org\openSource\ceshidao\PatientMapper.class
+org\openSource\ceshidao\UserMapper.class
+org\openSource\ceshiservice\PatientServiceImpl.class
+org\openSource\controller\HospitalController.class
+org\openSource\controller\UserController.class

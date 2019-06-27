@@ -1,0 +1,8 @@
+为了简化开发,所以使controller成为一个单独可以运行的war包,完成开发后,应删除以下内容:
+    1.所有"ceshi*"这样的package;
+    2.删除以下配置文件:
+        mybatis.xml
+        mysql.properties
+        spring-conf.xml
+        /mapper/*.xml
+    3.修改web.xml中服务器监听读取"spring-*.xml"

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>客户开发计划</title>
+<link href="/static/css/stylesheet.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/static/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="/static/js/javascript.js"></script>
+<script type="text/javascript" src="/static/easyui/jquery.min.js"></script>
+<script type="text/javascript" src="/static/easyui/jquery.easyui.min.js"></script>
+</head>
+
+<body>
+<div style="padding:5px;">
+  <div class="txt" style="padding-top:3px;" >当前位置：客户开发计划&nbsp;&gt;&nbsp;客户信息管理&nbsp;&gt;&nbsp;客户信息
+    <hr class="hr1" />
+  </div>
+  <div class="operation_button"></div>
+  <div class="search_input">
+    <ul class="txt">
+      <li>病人姓名：
+        <input id="crmName" type="text" size="30" />
+      </li>
+      <li>所属医师：
+        <select id="crmXiaoShowName">
+          <option>全部</option>
+          <option>小明</option>
+          <option>小红</option>
+          <option>小李</option>
+        </select>
+      </li>
+    </ul>
+    <button onclick="search()">搜索</button>
+  </div>
+  <div id="dateScope" th:fragment="dateScope">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table_list" >
+      <thead>
+        <tr>
+          <th width="10%">病人id</th>
+          <th width="10%">所属医师</th>
+          <th width="10%">病人姓名</th>
+          <th width="10%">病人年龄</th>
+          <th width="10%">病人性别</th>
+          <th width="10%">是否已婚</th>
+          <th width="10%">联系电话</th>
+          <th width="10%">病人地址</th>
+          <th width="10%">病人床位</th>
+          <th width="10%">操作</th>
+        </tr>
+      </thead>
+
+      <tbody th:if="${list != null}">
+        <tr th:each="va:${list}">
+			<!--<th><input type="checkbox" width="5%" /></th>-->
+			<th width="10%" th:text="${va.patientId}">病人id</th>
+			<th width="10%" th:text="${va.doctorId}">所属医师</th>
+			<th width="10%" th:text="${va.patientName}">病人姓名</th>
+			<th width="10%" th:text="${va.patientAge}">病人年龄</th>
+			<th width="10%" th:text="${va.patientSex}">病人性别</th>
+			<th width="10%" th:text="${va.patientMarital}">是否已婚</th>
+			<th width="10%" th:text="${va.patientTel}">联系电话</th>
+			<th width="10%" th:text="${va.patientAddress}">病人地址</th>
+            <th width="10%" th:text="${va.patientBedId}">病人床位</th>
+			<th width="10%">
+			    <a th:href="@{/kehu/contact_edit(crmId=${va.patientId})}"><img title="诊断" src="/static/images/user.ico" class="op_button" /></a>
+			</th>
+		</tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="position" th:fragment="pageNumberScope" id="pageNumberScope">
+  		<div th:if="${page!=null}">
+	  		<input id="max" type="hidden" th:value="${page.maxPage}" />
+	  		<input id="now" type="hidden" th:value="${page.goPage}" />
+			共<span th:text="${page.rowsNumber}"></span>条记录&nbsp;
+			每页<span th:text="${page.rowsPrePage}"></span>条&nbsp;
+			第<span id="nowPage" th:text="${page.goPage}"></span>页/共<span th:text="${page.maxPage}"></span>页
+			
+			<button onclick="goFirst()" title="首页">&laquo;首页</button>
+			<button id="pp1" onclick="pagedown()" title="上一页">&lt;上一页</button>
+			<button id="pp2" onclick="pageup()" title="下一页">下一页&gt;</button>
+			<button onclick="goEnd()" title="尾页">尾页&raquo;</button>
+			
+			转到&nbsp; <input id="gop" th:attr="placeholder=${page.goPage}" size="2" /> &nbsp;页
+			<button onclick="goToNumber()">go</button>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		load1(getParam());
+		load2(getParam());
+		//loadPageNumber();
+		//$('#sel option:selected').text()  获取select标签的值
+	})
+	
+	function getParam() {
+		var x1 = $('#crmName').val();
+		
+		var x2 = $('#crmXiaoShowName option:selected').text();
+		
+		var x3 = $('#crmAddress option:selected').text();
+		var x4 = $('#crmLv option:selected').text();
+		var x5 = $('#goPage').val();
+		var param = {
+				crmName : x1,
+				crmXiaoShowName : x2,
+				crmAddress : x3,
+				crmLv : x4,
+				goPage : x5
+		};
+		return param;
+	}
+	
+	function load1(arr) {
+		$('#dateScope').load('/hospital/getRows', arr);
+	}
+	
+	function load2(arr) {
+		$('#pageNumberScope').load('/hospital/getPage', arr);
+	}
+	
+	function goFirst() {
+		var arr = getParam();
+		arr.goPage = 1;
+		load1(arr);
+		load2(arr);
+	}
+	
+	function goEnd() {
+		var arr = getParam();
+		arr.goPage = $('#max').val();
+		load1(arr);
+		load2(arr);
+	}
+	
+	function search() {
+		var arr = getParam();
+		load1(arr);
+		load2(arr);
+	}
+	
+	
+	function pagedown() {
+		/* <![CDATA[ */
+		var v1 = $('#now').val();
+		$('#pp2').attr("disabled",false);
+		if(v1 - 1 < 1) {
+			$('#pp1').attr("disabled",true);
+			return 2;
+		}
+		var arr = getParam();
+		arr.goPage = parseInt(v1) - 1;
+		load1(arr);
+		load2(arr);
+		 /* ]]> */ 
+	}
+	
+	function pageup() {
+		/* <![CDATA[ */
+		var v1 = $('#now').val();
+		var max = $('#max').val();
+		$('#pp1').attr("disabled",false);
+		$('#tem').val(parseInt(v1) + 1);
+		if(v1 + 1 > max) {
+			$('#pp2').attr("disabled",true);
+			return 1;
+		}
+		var arr = getParam();
+		arr.goPage = parseInt(v1) + 1;
+		load1(arr);
+		load2(arr);
+		/* ]]> */
+	}
+	
+	function goToNumber() {
+		/* <![CDATA[ */
+		var max = $('#max').val();
+		var v1 = $('#gop').val();
+		if(isNaN(v1)) {
+			return false;
+		}
+		var v3 = parseInt(v1);
+		if(v3 < parseInt('1') || v3 > parseInt(max)) {
+			return false;
+		}
+		var arr = getParam();
+		arr.goPage = v3;
+		load1(arr);
+		load2(arr);
+		/* ]]> */
+	}
+	
+</script>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" />
+    <script type="text/javascript" src="/static/layui/layui.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+<div style="height: 100px;"></div>
+<input type="hidden" name="id" id="one" />
+<div class="layui-container" id="dataScope1" th:fragment="dataScope1">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md1">
+            <button type="button" value="返回" class="layui-btn" onclick="javascript:history.go(-1);"><i class="layui-icon"></i></button>
+        </div>
+        <div class="layui-col-md1">
+            <a href="/index.html" class="layui-btn layui-btn-normal" style="width: 100%;">返回首页</a>
+        </div>
+
+    </div>
+    <div style="height: 50px"></div>
+    <div class="layui-row layui-col-space1" th:if="${list != null}">
+        <div class="layui-col-md4" th:each="ve:${list}">
+            <div class="layui-row" style="border: solid 1px;">
+                <div class="layui-col-md4" style="align-content: center">
+                    <img src="/static/images/doctor.png" style="height: 100px" />
+                </div>
+                <div class="layui-col-md5">
+                    <p>医师姓名:<span th:text="${ve.doctorName}"></span></p>
+                    <p>医师年龄:<span th:text="${ve.doctorAge}"></span></p>
+                    <p>医师电话:<span th:text="${ve.doctorTel}"></span></p>
+                </div>
+                <div class="layui-col-md3">
+                    <p>挂号人数:<span th:text="${ve.number}"></span>/5</p>
+                    <button type="button" class="layui-btn layui-btn-warm" onclick="javascript:func1(this)">立即挂号</button>
+                    <input type="hidden" id="did" th:value="${ve.doctorId}" />
+                    <input type="hidden" id="dname" th:value="${ve.doctorName}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+<script type="text/javascript">
+
+    function func1(x) {
+
+        var did = $(x).next();
+        var dname = did.next();
+        var id = did.val();
+        var name = dname.val();
+        var info = '确认您要挂号:' + name + '医师吗?';
+        var res = confirm(info);
+        if(res) {
+            alert('success');
+        } else {
+            alert('fail');
+        }
+    }
+
+</script>
+</html>

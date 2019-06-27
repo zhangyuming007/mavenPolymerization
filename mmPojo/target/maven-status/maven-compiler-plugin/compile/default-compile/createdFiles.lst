@@ -1,0 +1,6 @@
+org\openSource\pojo\PageTools.class
+org\openSource\pojo\DoctorBean.class
+org\openSource\pojo\PatientBean.class
+org\openSource\pojo\HospitalDepartmentsBean.class
+org\openSource\pojo\PageHelper.class
+org\openSource\pojo\UserBean.class

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>客户开发计划</title>
+<link href="/static/css/stylesheet.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/javascript.js"></script>
+<script type="text/javascript" src="/static/easyui/jquery.min.js"></script>
+<script type="text/javascript" src="/static/easyui/jquery.easyui.min.js"></script>
+</head>
+
+<body style="width: 1279px">
+	<div style="padding: 5px;">
+		<div class="txt" style="padding-top: 3px;">
+			当前位置：客户开发计划&nbsp;&gt;&nbsp;客户信息管理&nbsp;&gt;&nbsp;<a href="list.html">客户信息</a>&nbsp;&gt;&nbsp;编辑客户信息
+			<hr class="hr1" />
+		</div>
+		
+	</div>
+	<form action="/kehu/editKeHuOk" method="post">
+			<div class="operation_button">
+				<a href="#" title="返回" onclick="back()">返回</a>
+				<input type="submit" value="保存" />
+			</div>
+			<div class="out_bg">
+				<div class="in_bg">
+					<!-- saleId  saleName  saleZy  saleLxr  saleTel  saleTime  saleJhms  saleMade  saleLy  saleSuccjv  saleZptime  saleZpgei -->
+					<table border="0" cellpadding="0" cellspacing="0"
+						class="table_input txt">
+						<tr>
+							<td width="126">编号</td>
+							<td width="411"><input type="text" name="crmId"
+								th:value="${kehu.crmId}" readonly="readonly" /></td>
+							<td width="126">贡献金额</td>
+							<td width="442"><input name="crmMoney"
+								th:value="${kehu.crmMoney}" type="text" disabled="disabled" /></td>
+						</tr>
+						<tr>
+							<td>*客户名称</td>
+							<td><input name="crmName" th:value="${kehu.crmName}"
+								type="text" /></td>
+							<td>客户地址</td>
+							<td><input name="crmAddress" th:value="${kehu.crmAddress}"
+								type="text" /></td>
+						</tr>
+						<tr>
+							<td>上次购买时间</td>
+							<td><input name="crmScgtimeUp" th:value="${kehu.crmScgtimeUp}" disabled="disabled"
+								type="text" /></td>
+							<td>确认流失时间</td>
+							<td>
+							<!-- date类型的input会自动解析传入的yyyy-MM-dd类型的字符串 -->
+							<input id="dt" name="crmQrlstime" type="date" th:value="${kehu.crmQrlstimeUp}" />
+							</td>
+						</tr>
+						<tr>
+							<td>客户等级</td>
+							<td><select id="sel1" style="width: 311px; height: 30px;"
+								name="crmLv">
+									<option>请选择...</option>
+									<option value="战略合作伙伴" th:selected="${kehu.crmLv == '战略合作伙伴'}">战略合作伙伴</option>
+									<option value="合作伙伴" th:selected="${kehu.crmLv == '合作伙伴'}">合作伙伴</option>
+									<option value="大客户" th:selected="${kehu.crmLv == '大客户'}">大客户</option>
+									<option value="普通客户" th:selected="${kehu.crmLv == '普通客户'}">普通客户</option>
+							</select></td>
+							<td>客户经理</td>
+							<td><select id="sel2" style="width: 311px; height: 30px;"
+								name="keHuJingLiId">
+									<option value="-1">请选择...</option>
+									<option value="2" th:selected="${kehu.crmXiaoShowName == '小黑'}">小明</option>
+									<option value="1" th:selected="${kehu.crmXiaoShowName == '小王'}">旺财</option>
+							</select></td>
+						</tr>
+					</table>
+
+				</div>
+			</div>
+		</form>
+</body>
+</html>

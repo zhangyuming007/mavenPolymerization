@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+
+    <link rel="stylesheet" href="/static/layui/css/layui.css" />
+    <script type="text/javascript" src="/static/layui/layui.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+</head>
+
+<body>
+<div style="height: 100px;"></div>
+<div class="layui-container">
+    <div class="layui-row">
+        <div class="layui-col-md1">
+            <button type="button" value="返回" class="layui-btn" onclick="javascript:history.go(-1);"><i class="layui-icon"></i></button>
+        </div>
+        <div class="layui-col-md3">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">科室名称:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" />
+                </div>
+                <br /><br />
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <button type="button" onclick="f1()" class="layui-btn layui-btn-warm">暖色按钮</button>
+        </div>
+    </div>
+    <div id="dateScope1" th:fragment="dateScope1">
+        <div th:if="${list} ne null">
+            <div class="layui-row layui-col-space1">
+                <div class="layui-col-md2" th:each="var, varStat:${list}" th:if="${varStat.index &lt; 6}">
+                    <a th:href="@{/hospital/showDoctor(id=${var.hospitalDepartmentsId})}" style="width: 100%" class="layui-btn" th:text="${var.hospitalDepartmentsName}"></a>
+                </div>
+            </div>
+            <div style="height: 50px"></div>
+            <div class="layui-row layui-col-space1">
+                <div class="layui-col-md2" th:each="var, varStat:${list}" th:if="${varStat.index &gt; 5 and varStat.index &lt; 12}">
+                    <a th:href="@{//hospital/showDoctor(id=${var.hospitalDepartmentsId})}" style="width: 100%" class="layui-btn" th:text="${var.hospitalDepartmentsName}"></a>
+                </div>
+                <div class="layui-col-md1"></div>
+            </div>
+            <div style="height: 50px"></div>
+            <div class="layui-row layui-col-space1">
+                <div class="layui-col-md2" th:each="var, varStat:${list}" th:if="${varStat.index &gt; 11 and varStat.index &lt; 18}">
+                    <a th:href="@{/hospital/showDoctor(id=${var.hospitalDepartmentsId})}" style="width: 100%" class="layui-btn" th:text="${var.hospitalDepartmentsName}"></a>
+                </div>
+            </div>
+            <div style="height: 50px"></div>
+            <div class="layui-row layui-col-space1">
+                <div class="layui-col-md2" th:each="var, varStat:${list}" th:if="${varStat.index &gt; 17 and varStat.index &lt; 24}">
+                    <a th:href="@{/hospital/showDoctor(id=${var.hospitalDepartmentsId})}" style="width: 100%" class="layui-btn" th:text="${var.hospitalDepartmentsName}"></a>
+                </div>
+            </div>
+            <div style="height: 50px"></div>
+            <div class="layui-row layui-col-space1">
+                <div class="layui-col-md2" th:each="var, varStat:${list}" th:if="${varStat.index &gt; 23 and varStat.index &lt; 30}">
+                    <a th:href="@{/hospital/showDoctor(id=${var.hospitalDepartmentsId})}" style="width: 100%" class="layui-btn" th:text="${var.hospitalDepartmentsName}"></a>
+                </div>
+            </div>
+            <div style="height: 50px"></div>
+            <div class="layui-row layui-col-space1">
+                <div class="layui-col-md2" th:each="var, varStat:${list}" th:if="${varStat.index &gt; 29 and varStat.index &lt; 36}">
+                    <a th:href="@{/hospital/showDoctor(id=${var.hospitalDepartmentsId})}" style="width: 100%" class="layui-btn" th:text="${var.hospitalDepartmentsName}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+<script type="text/javascript">
+    $(function () {
+        $('#dateScope1').load("/hospital/getKeShi");
+    })
+</script>
+
+</html>

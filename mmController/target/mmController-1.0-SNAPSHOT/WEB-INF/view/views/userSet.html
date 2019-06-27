@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="/static/assets/css/layui.css" />
+    <link rel="stylesheet" href="/static/assets/css/view.css"/>
+    <title>管理后台</title>
+</head>
+<body>
+
+<table id="demo" lay-filter="test"></table>
+
+ <script src="/static/assets/layui.all.js"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,width: 1150
+            ,url: '/demo/table/user/' //数据接口
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {field: 'id', title: '病人ID', width:80, sort: true, fixed: 'left'}
+                ,{field: 'username', title: '医师工号', width:110}
+                ,{field: 'username', title: '病人姓名', width:110}
+                ,{field: 'sex', title: '年龄', width:100}
+                ,{field: 'city', title: '性别', width:100}
+                ,{field: 'sign', title: '婚姻状况', width: 100}
+                ,{field: 'experience', title: '联系方式', width: 110}
+                ,{field: 'score', title: '居住地址', width: 150}
+                ,{field: 'classify', title: '床位信息', width: 150}
+                ,{field: 'classify', title: '余额', width: 150}
+            ]]
+        });
+
+    });
+</script>
+</body>
+</html>

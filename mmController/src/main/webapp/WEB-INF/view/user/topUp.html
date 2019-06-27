@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" />
+    <script type="text/javascript" src="/static/layui/layui.js"></script>
+</head>
+<body>
+
+    <button type="button" class="layui-btn" onclick="javascript:history.go(-1);"><i class="layui-icon"></i></button>
+    <div style="height: 150px;"></div>
+    <div class="layui-container">
+        <div class="layui-row">
+            <div class="layui-col-md6 layui-col-md-offset3">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">你的账号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" />
+                        </div>
+                        <br />
+                        <label class="layui-form-label">充值金额(元)</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="required" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" />
+                        </div>
+                        <br /><br />
+                    </div>
+                </form>
+                <div class="layui-row">
+                    <div class="layui-col-md6 layui-col-md-offset4">
+                        <img src="/static/img2/timg.jpg" style="height: 300px;" />
+                    </div>
+                </div>
+                <br /><br />
+                <div class="layui-row">
+                    <div class="layui-col-md10 layui-col-md-offset2">
+                        <a href="http://www.layui.com" class="layui-btn layui-btn-normal" style="width: 100%;">确认充值</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -18,7 +18,7 @@ public class PublicController {
      * @param url1 一个url地址
      * @return 返回视图让thymeleaf视图解析器进行解析
      */
-    @RequestMapping(value = "/url1")
+    @RequestMapping(value = "/{url1}")
     public String oneUrlParam(
             @PathVariable(value = "url1") String url1
     ) {
@@ -31,7 +31,7 @@ public class PublicController {
      * @param url2 第二个url地址
      * @return 返回视图让thymeleaf视图解析器进行解析
      */
-    @RequestMapping(value = "/url1/url2")
+    @RequestMapping(value = "/{url1}/{url2}")
     public String twoUrlParam(
             @PathVariable(value = "url1") String url1,
             @PathVariable(value = "url2") String url2
@@ -46,7 +46,7 @@ public class PublicController {
      * @param url3 第三个url地址
      * @return 返回视图让thymeleaf视图解析器进行解析
      */
-    @RequestMapping(value = "/url1/url2/url3")
+    @RequestMapping(value = "/{url1}/{url2}/{url3}")
     public String threeUrlParam(
             @PathVariable(value = "url1") String url1,
             @PathVariable(value = "url2") String url2,
@@ -63,7 +63,7 @@ public class PublicController {
      * @param url4 第四个url地址
      * @return 返回视图让thymeleaf视图解析器进行解析
      */
-    @RequestMapping(value = "/url1/url2/url3/url4")
+    @RequestMapping(value = "/{url1}/{url2}/{url3}/{url4}")
     public String fourUrlParam(
             @PathVariable(value = "url1") String url1,
             @PathVariable(value = "url2") String url2,
